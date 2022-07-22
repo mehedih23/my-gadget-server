@@ -54,6 +54,13 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/getitem/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await itemCollection.findOne(query);
+            res.send(result);
+        })
+
 
         //----------------- Patch ---------------//
         // User //
@@ -66,6 +73,14 @@ async function run() {
             res.send(result);
         })
 
+        app.patch('/updateDetails/:id', async (req, res) => {
+            const id = req.params.id;
+            const user = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updatedDoc = { $set: user }
+            const result = await itemCollection.updateOne(filter, updatedDoc)
+            res.send(result);
+        })
     }
     finally {
 
