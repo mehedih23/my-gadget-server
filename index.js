@@ -49,6 +49,11 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/allitems', async (req, res) => {
+            const result = await itemCollection.find().toArray();
+            res.send(result);
+        })
+
 
         //----------------- Patch ---------------//
         // User //
